@@ -133,12 +133,32 @@
 
           {% if posts %}
           {% for post in posts %}
+          
+          {% if post.photos %}
           <div class="post span6">
             <div class="row">
               <div class="span6">
                 <h2><a href="{{ post.permalink }}">{{ post.title }}</a></h2>
               </div>
             </div>
+            <div class="post-body">
+              {% for photo in post.photos %}
+              {% if loop.index == 1 %}
+
+                <a href="{{ post.permalink }}">
+                  {% if photo %}
+                  <img src="{{ photo.width_1200 }}" />
+                  {% else %}
+                  <img src="http://placehold.it/400x300/0eafff/ffffff.png" alt="" />
+                  {% endif %}
+                </a>
+                
+              {% endif %}
+              {% endfor %}
+            </div>
+            {% endif %}
+            
+            <!-- 
             <div class="post-body" data-type-cleanup="true">
               {{ post.content }}
             </div>
@@ -151,6 +171,7 @@
               </div>
             </div>
           </div>
+          -->
           {% endfor %}
           {% if not is_tag %}
           <div class="pagination span6">
